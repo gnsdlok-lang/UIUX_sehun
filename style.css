@@ -149,6 +149,23 @@ button:active{
     transform: translateY(1px);
 }
 
+#subscribeMessage{
+    margin-top: 16px;
+    color: #796d88;
+}
+#subscribeMessage.is-success{
+    color: #47a062;
+    background-color: #e6f4ea;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+#subscribeButton:disabled{
+    color: #ffffff;
+    background-color: #bfbfbf;
+    cursor: not-allowed;
+}
+
 /*웹페이지가 표시되는 가로 폭이 768px 이하일 때문 적용*/
 @media (max-width: 768px) {
     body{

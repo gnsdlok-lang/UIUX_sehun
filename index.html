@@ -69,11 +69,14 @@
         </section>
         <section id="subscribe" class="subscribe-card">
             <h2>업데이트 소식받기</h2>
-            <form>
+            <form id="subscribeForm">
                 <label for="email">이메일</label>
                 <input type="email" id="email" name="email">
-                <button type="submit">업데이트 소식 신청하기</button>
+                <button id="subscribeButton" type="submit">업데이트 소식 신청하기</button>
             </form>
+            <p id="subscribeMessage" aria-live="polite">
+                이메일을 입력한뒤 신청하기 버튼을 눌러주세요.
+            </p>
 
         </section>
 
@@ -82,6 +85,7 @@
     <footer>
             <small>2026 선택 도우미 서비스.</small>
     </footer>
+<script src="script.js"></script>
 </body>
 
 </html>
