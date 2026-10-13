@@ -40,22 +40,25 @@
         </section>
         <section id="feature">
             <h2> 숫자 뽑기</h2>
-            <ul class="features-list">
-                <li class="feature-card">
-                    <h3>1~10 사이의 숫자 뽑기</h3>
-                    <p>1부터 10까지의 숫자 중에서 랜덤으로 하나를 선택합니다.</p>
-                </li>
-                <li class="feature-card">
-                    <h3>원하는 숫자를 입력해서 뽑기</h3>
-                    <p>원하시는 숫자를 입력하시면 그 숫자 중에서 랜덤으로 하나를 선택합니다.</p>
-        
-                </li>
-                <li class="feature-card">
-                    <h3>1~45 사이의 숫자 뽑기</h3>
-                    <p>1부터 45까지의 숫자 중에서 랜덤으로 하나를 선택합니다.</p>
-                </li>
-        
-            </ul>
+            <div class="tabs" role="tablist" aria-label="뽑기 기능 선택">
+                <button id="tab-practice" class="tab is-active" type="button" role = "tab"  data-target="#feature-practice" aria-selected="true" aria-controls="feature-practice">1~10 사이의 숫자 뽑기</button>
+                <button id="tab-audience" class="tab" type="button" role = "tab"  data-target="#feature-audience" aria-selected="false" aria-controls="feature-audience">원하는 숫자를 입력해서 뽑기</button>
+                <button id="tab-feedback" class="tab" type="button" role = "tab"  data-target="#feature-feedback" aria-selected="false" aria-controls="feature-feedback">1~45 사이의 숫자 뽑기</button>
+            </div>
+
+            <div id="feature-practice" class="panel is-active" role="tabpanel" aria-labelledby="tab-practice">
+                <h3>1~10 사이의 숫자 뽑기</h3>
+                <p>1부터 10까지의 숫자 중에서 랜덤으로 하나를 선택합니다.</p>
+            </div>
+            <div id="feature-audience" class="panel" role="tabpanel" aria-labelledby="tab-audience" hidden>
+                <h3>원하는 숫자를 입력해서 뽑기</h3>
+                <p>원하시는 숫자를 입력하시면 그 숫자 중에서 랜덤으로 하나를 선택합니다.</p>
+            </div>
+            <div id="feature-feedback" class="panel" role="tabpanel" aria-labelledby="tab-feedback" hidden>
+                <h3>1~45 사이의 숫자 뽑기</h3>
+                <p>1부터 45까지의 숫자 중에서 랜덤으로 하나를 선택합니다.</p>
+            </div>
+
 
         </section>
         <section id="step">
@@ -66,6 +69,34 @@
                 <li>결과를 확인합니다.</li>
             </ol>
 
+        </section>
+
+        <section id="event-practice">
+            <h2>보너스 활동</h2>
+            <div class="event-grid">
+                <article class="event-card">
+                    <h3>테마 바꾸기</h3>
+                    <button id="themeButton" type="button">다크 테마로 변경</button>
+                </article>
+                <article class="event-card">
+                    <h3>닉네임 입력하기</h3>
+                    <label for="nickname">닉네임</label>
+                    <input type="text" id="nickname" maxlength="10">
+                    <p id="nicknameCount" aria-live="polite">0/10</p>
+                </article>
+                
+                <article class="event-card">
+                    <h3>게임 활용 동의</h3>
+                        <label class="agree-row">
+                            <input type="checkbox" id="agreeCheck">
+                            게임 활용에 동의 합니다
+                        </label>
+                        <p id="agreeMessage" aria-live="polite">동의 후 시작합니다</p>
+                        <button id="startButton" type="button" disabled>
+                            시작
+                        </button>
+                </article>
+            </div>
         </section>
         <section id="subscribe" class="subscribe-card">
             <h2>업데이트 소식받기</h2>
