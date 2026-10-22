@@ -86,10 +86,10 @@
                 </article>
                 
                 <article class="event-card">
-                    <h3>게임 활용 동의</h3>
+                    <h3>2진 랜덤 선택 시작</h3>
                         <label class="agree-row">
                             <input type="checkbox" id="agreeCheck">
-                            게임 활용에 동의 합니다
+                            랜덤 선택에 동의 합니다
                         </label>
                         <p id="agreeMessage" aria-live="polite">동의 후 시작합니다</p>
                         <button id="startButton" type="button" disabled>
@@ -98,6 +98,75 @@
                 </article>
             </div>
         </section>
+
+        <dialog id="recording-dialog" aria-labelledby="recording-title" aria-describedby="recording-descripion">
+            <h2 id="recording-title">랜덤 선택 안내</h2>
+            <p id="recording-descripion">랜덤 선택에 약관에 동의 합니다. 지금은 실제 작동하지는 않습니다.</p>
+            <div class="dialog-actions">
+                <button id="recording-cancel" type="button">돌아가기</button>
+                <button id="recording-confirm" type="button">동의하고 시작하기</button>
+            </div>
+        </dialog>
+
+        <section id="training-flow" class="training-flow" hidden>
+            <h2>랜덤 설정</h2>
+            <p class="progress" aria-label="설정 진행 단계" >
+                <span class="progress_item">1.항목선택  </span>
+                <span class="progress_item">2.이름입력  </span>
+                <span class="progress_item">3.확인  </span>
+            </p>
+    
+           <section class="step" data-step="1" hidden>
+                <fieldset id="choice-radio">
+                    <legend>랜덤 항목을 선택하세요</legend>
+                        <div><input type="radio" id="choice-do" name="random_1" value="한다/안한다">
+                        <label for="choice-do">한다/안한다</label></div>
+                        <div><input type="radio" id="choice-buy" name="random_1" value="산다/안산다">
+                        <label for="choice-buy">산다/안산다</label></div>
+                        <div><input type="radio" id="choice-eat" name="random_1" value="먹는다/안먹는다">
+                        <label for="choice-eat">먹는다/안먹는다</label></div>
+                        <p id="choice-error" class="error-message" aria-live="polite"></p>
+                </fieldset>
+                <div class="step-actions">
+                    <button id="option-next" type="button">다음으로 이동(항목 설정)</button>
+                </div>
+            </section>      
+            
+            <section class="step" data-step="2" hidden>
+                <h3>항목의 이름(목적어)를 입력해주세요 </h3>
+                <label for="presentation-title">항목 이름</label>
+                <input id="presentation-title" type="text" placeholder="예: 가방을" aria-describedby="title-error">
+                <p id="nameConnet" aria-live="polite">결과 미리보기</p>
+                <p id="title-error" class="error-message" aria-live="polite"></p>
+                <button id="title-prev" type="button">이전</button>
+                <button id="title-next" type="button">다음(최종확인)</button>
+            </section>   
+            
+            <section class="step" data-step="3" hidden>
+                <h3>입력한 내용을 확인해주세요</h3>
+                <div class="summary-list">
+                    <div><span>제목</span><strong id="summary-title"></strong></div>
+                    <div><span>랜덤 항목</span><strong id="summary-duration"></strong></div>
+                </div>
+                <div>
+                    <input type="checkbox" id="suggest">
+                    <label for="suggest">추천 하시겠습니까?</label>
+                    <br>
+                    <p id="suggest-thank" hidden>추천 해주셔서 감사합니다!</p>
+                </div>
+                <div class="step-actions">
+                    <button id="summary-prev" type="button">수정하기</button>
+                    <button id="finish-button" type="button">랜덤 실행</button>
+                </div>
+            </section>
+
+            <section class="step" data-step="4" hidden>
+                <h3>설정이 완료 되었습니다</h3>
+                <p>결과는 아직 나오지 않습니다 죄송합니다</p>
+                <button id="restart-button" type="button">다시 설정하기</button>
+            </section>
+        </section>
+
         <section id="subscribe" class="subscribe-card">
             <h2>업데이트 소식받기</h2>
             <form id="subscribeForm">

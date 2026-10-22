@@ -110,3 +110,152 @@ function handleTabClick(event) {
 tabs.forEach(function(tab) {
     tab.addEventListener("click", handleTabClick);
 });
+
+const trainingFlow = document.querySelector("#training-flow");
+const flowSteps = trainingFlow.querySelectorAll(".step");
+const progressItems = trainingFlow.querySelectorAll(".progress_item");
+
+const choiceError = document.querySelector("#choice-error")
+const optionNext = document.querySelector("#option-next")
+
+const titleInput = document.querySelector("#presentation-title");
+const titleNameConnet = document.querySelector("#nameConnet");
+const titleError = document.querySelector("#title-error")
+const titlePrev = document.querySelector("#title-prev")
+const titleNext = document.querySelector("#title-next")
+
+const summaryPrev = document.querySelector("#summary-prev")
+const finishButton = document.querySelector("#finish-button")
+const suggest = document.querySelector("#suggest")
+const suggestThank = document.querySelector("#suggest-thank");
+const restartButton = document.querySelector("#restart-button")
+const summaryTitle = document.querySelector("#summary-title")
+const summaryDuration = document.querySelector("#summary-duration")
+const summarySuggest = document.querySelector("#summary-suggest")
+
+
+const formData = {
+    choice:"", title:"", suggest: false
+}
+
+function showStep(index) {
+    flowSteps.forEach((step, i) => { step.hidden = i !==index;});
+    progressItems.forEach((item, i) => {
+        item.classList.toggle("is-active", i === index);
+    });
+}
+
+const recodingDialog = document.querySelector("#recording-dialog");
+const recodingCancel = document.querySelector("#recording-cancel");
+const recodingConfirm = document.querySelector("#recording-confirm");
+
+function revokeRecordingAgreement(){
+    agreeCheck.checked = false;
+    trainingFlow.hidden = true;
+    handleAgreeChange();
+    agreeCheck.focus();
+}
+
+startButton.addEventListener("click", () => {
+    if (!agreeCheck.checked) return;
+    recodingDialog.showModal();
+});
+recodingCancel.addEventListener("click", () =>{
+    recodingDialog.close()
+    revokeRecordingAgreement()
+});
+recodingDialog.addEventListener("cancle", revokeRecordingAgreement);
+recodingConfirm.addEventListener("click", () => {
+    if (!agreeCheck.checked) return;
+    recodingDialog.close();
+    trainingFlow.hidden = false;
+    showStep(0);
+    trainingFlow.scrollIntoView({behavior: "smooth"});
+});
+let choiceValue = null
+function validateRadio() {
+    const choiceRadio = document.querySelector('input[name="random_1"]:checked');
+    if (choiceRadio == null) {
+        choiceError.textContent = "랜덤 항목을 선택해 주세요";
+        return false;
+    } else {choiceError.textContent = "";
+        choiceValue = choiceRadio.value
+        formData.choice = choiceValue;
+        return true;
+    }
+}
+
+optionNext.addEventListener("click", () => {
+    if(!validateRadio()) return;
+    showStep(1)
+})
+
+
+function titleConnet() {
+    const titleinputTrim = titleInput.value.trim()
+    const titleinputView = titleInput.value
+    if (!titleinputTrim){
+        titleNameConnet.textContent = "결과 미리보기"
+    } else {
+        titleNameConnet.textContent = `${titleinputView} ${choiceValue}`;
+    }
+}
+titleInput.addEventListener("input", titleConnet);
+
+function validateTitle() {
+    const value = titleInput.value.trim();
+    if (!value) {
+        titleError.textContent = "항목(목적어)를 입력해주세요"
+        titleInput.classList.add("has-error");
+        titleInput.focus();
+        return false;
+    }
+    titleError.textContent = "";
+    titleInput.classList.remove("has-error");
+    formData.title = value;
+    return true;
+}
+
+titleNext.addEventListener("click", () => {
+    if(!validateTitle()) return;
+    summaryTitle.textContent = formData.title;
+    summaryDuration.textContent = formData.choice;
+    showStep(2)
+})
+titlePrev.addEventListener("click", () => {
+    showStep(0)
+})
+suggest.addEventListener("change", (e) => {
+    formData.suggest = e.target.checked;
+    
+    if (e.target.checked) {
+        suggestThank.hidden = false; 
+    } else {
+        suggestThank.hidden = true; 
+    }
+});
+summaryPrev.addEventListener("click", () => {
+    showStep(1); 
+});
+
+finishButton.addEventListener("click", () => {
+    console.log("최종 제출 데이터:", formData);
+    showStep(3);
+});
+restartButton.addEventListener("click", () => {
+    formData.choice = "";
+    formData.title = "";
+    formData.suggest = false;
+    choiceValue = null;
+
+    const checkedRadio = document.querySelector('input[name="random_1"]:checked');
+    if(checkedRadio) checkedRadio.checked = false;
+    
+    titleInput.value = "";
+    titleNameConnet.textContent = "결과 미리보기";
+    suggest.checked = false;
+    suggestThank.hidden = true;
+
+    showStep(0);
+});
+
