@@ -331,7 +331,7 @@ function runRandomizer() {
     const randomIndex = Math.floor(Math.random() * candidateList.length);
     DinnerformData.finalResult = candidateList[randomIndex];
 
-    resultImage.src = `./assets/images/${DinnerformData.finalResult.id}.png`;
+    resultImage.src = `./assets/images/${DinnerformData.finalResult.id}.PNG`;
     resultImage.alt = DinnerformData.finalResult.name;
     resultName.textContent = DinnerformData.finalResult.name;
 }
