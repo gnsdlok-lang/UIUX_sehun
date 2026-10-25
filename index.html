@@ -33,11 +33,94 @@
     <main>
         <section id="about">
             <h2>식사 고르기</h2>
-            <h3>점심 식사 메뉴 선택</h3>
+            <h3>식사 메뉴 선택</h3>
             <img src="assets/images/random_box.png" alt="랜덤 박스 이미지">
-            <button onclick="randomChoice()">랜덤 선택</button>
-            <p> 한식 ,중식, 양식 중에 하나가 선택 됩니다</p>
+            <button id="start-meal-btn" type="button">식사 고르기</button>
+            <p> 식사,회식 메뉴 선택을 도와줍니다</p>
         </section>
+
+        <dialog id="meal-start-dialog" aria-labelledby="start-title">
+            <h2 id="start-title">식사 메뉴 선정</h2>
+            <p>메뉴 선정을 시작하시겠습니까?</p>
+            <div class="dialog-actions">
+                <button id="start-cancel" type="button">취소</button>
+                <button id="start-confirm" type="button">시작하기</button>
+            </div>
+        </dialog>
+
+
+        <section id="meal-flow" class="meal-flow" hidden>
+            <h2>식사 메뉴 랜덤 설정</h2>
+            
+            <p class="progress" aria-label="설정 진행 단계">
+                <span class="progress_item">1. 목적선택 </span>
+                <span class="progress_item">2. 항목선택 </span>
+                <span class="progress_item">3. 결과확인 </span>
+            </p>
+
+            <section class="meal-step" data-step="0" hidden>
+                <h3>메뉴 선정을 위해 식사 목적을 선택해주세요</h3>
+                <fieldset id="meal-dinner-choice">
+                    <legend class="sr-only">식사 목적</legend>
+                    <div>
+                        <input type="radio" id="purpose-meal" name="meal_purpose" value="식사">
+                        <label for="purpose-meal">식사</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="purpose-dinner" name="meal_purpose" value="회식">
+                        <label for="purpose-dinner">회식</label>
+                    </div>
+                    <p id="purpose-error" class="error-message" aria-live="polite"></p>
+                </fieldset>
+                <div class="step-actions">
+                    <button id="purpose-next" type="button">다음(식사 선택하기)</button>
+                </div>
+            </section>
+
+            <section class="meal-step" data-step="1" hidden>
+                <h3>원하는 항목만 선택해주세요</h3>
+                <fieldset id="category-group">
+                    <legend class="sr-only">식사 항목 후보</legend>
+                    <label><input type="checkbox" name="meal_category" value="한식"> 한식</label>
+                    <label><input type="checkbox" name="meal_category" value="중식"> 중식</label>
+                    <label><input type="checkbox" name="meal_category" value="양식"> 양식</label>
+                    <label><input type="checkbox" name="meal_category" value="일식"> 일식</label>
+                    
+                    <p id="category-preview" aria-live="polite"></p>
+                    <p id="category-error" class="error-message" aria-live="polite"></p>
+                </fieldset>
+                <div class="step-actions">
+                    <button id="category-prev" type="button">뒤로가기(목적변경)</button>
+                    <button id="category-next" type="button">다음(랜덤 실행)</button>
+                </div>
+            </section>
+
+            <section class="meal-step" data-step="2" hidden>
+                <h3>오늘의 추천 메뉴입니다!</h3>
+                <div class="result-display" style="text-align: center; margin: 20px 0;">
+                    <img id="result-image" src="" alt="추천 메뉴 사진" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+                    <h2 id="result-name" style="margin-top: 10px;"></h2>
+                </div>
+                <div class="step-actions">
+                    <button id="result-prev" type="button">&lt;- 항목변경</button>
+                    <button id="result-rerun" type="button">다시 실행하기</button>
+                    <button id="result-exit" type="button">나가기</button>
+                </div>
+            </section>
+        </section>
+
+
+        <dialog id="meal-exit-dialog">
+            <p>결과를 저장하시겠습니까?</p>
+            <div class="dialog-actions">
+                <button id="exit-save" type="button">저장하기</button>
+                <button id="exit-close" type="button">나가기</button>
+            </div>
+        </dialog>
+
+
+
+
         <section id="feature">
             <h2> 숫자 뽑기</h2>
             <div class="tabs" role="tablist" aria-label="뽑기 기능 선택">
